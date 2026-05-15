@@ -3,7 +3,9 @@ import pygame
 from colorama import init, Fore
 import random
 
-
+# =========================
+# INICIALIZAÇÃO
+# =========================
 init(autoreset=True)
 
 try:
@@ -13,6 +15,9 @@ except:
     print("Áudio indisponível neste ambiente.")
     audio_ativo = False
 
+# =========================
+# ESTADO DO JOGO
+# =========================
 player_name = ""
 inventory = []
 current_room = "centro_hawkins"
@@ -22,6 +27,10 @@ lanterna_on = False
 lanterna_bateria = 100
 entidade_sombra = False
 
+# =========================
+# SONS
+# =========================
+
 def tocar_som(nome):
     if audio_ativo:
         try:
@@ -30,6 +39,9 @@ def tocar_som(nome):
         except:
             pass
 
+# =========================
+# MAPA
+# =========================
 rooms = {
     "centro_hawkins": {
         "som": "cidade.wav",
@@ -71,17 +83,15 @@ rooms = {
         "detalhes": "A madeira range sozinha.",
         "comandos": {
             "andar para o oeste": "floresta",
-            "entrar no quarto": "quarto",
         },
     },
 
-    "laboratorio": {
-        "som": "laboratorio.wav",
-        "itens": ["cartao de acesso"],
-        "descricao": "Laboratório secreto.",
-        "detalhes": "Luzes falham constantemente.",
+    "laboratorio_externo": {
+        "som": "cidade.wav",
+        "descricao": "Entrada do laboratório.",
+        "detalhes": "Luzes vermelhas piscam.",
         "comandos": {
-            "andar para o oeste": "corredor",
+            "andar para o norte": "centro_hawkins",
         },
     },
 
@@ -104,6 +114,9 @@ rooms = {
     }
 }
 
+# =========================
+# FUNÇÕES
+# =========================
 
 def limpar_tela():
     print("\n" * 3)
@@ -143,9 +156,11 @@ def mostrar_status():
     if itens:
         print(Fore.YELLOW + f"Itens: {', '.join(itens)}")
 
-    print(Fore.GREEN + "\nCOMANDOS: olhar, andar, entrar, lanterna, pegar item")
+    print(Fore.GREEN + "\nCOMANDOS: olhar ao redor, andar, entrar, lanterna, pegar item")
 
-
+# =========================
+# MOVIMENTO
+# =========================
 
 def mover(direcao):
     global player_position, lanterna_bateria
@@ -161,19 +176,23 @@ def mover(direcao):
     if direcao == "leste": player_position[0] += 1
     if direcao == "oeste": player_position[0] -= 1
 
+# =========================
+# LOOP (SANDBOX)
+# =========================
 
 comandos_demo = [
-    "olhar",
+    "olhar ao redor",
     "andar para o norte",
     "lanterna",
-    "olhar",
+    "olhar ao redor",
     "pegar item",
     "andar para o leste",
-    "olhar",
+    "olhar ao redor",
     "sair"
 ]
 
 for cmd in comandos_demo:
+
     mostrar_status()
 
     print(Fore.CYAN + f"> {cmd}")
@@ -185,12 +204,13 @@ for cmd in comandos_demo:
         lanterna_on = not lanterna_on
         print("Lanterna ON" if lanterna_on else "Lanterna OFF")
 
-    elif cmd == "olhar":
+    elif cmd in ["olhar", "olhar ao redor"]:
         print(rooms[current_room]["detalhes"])
 
     elif cmd.startswith("andar"):
         direcao = cmd.replace("andar para o ", "")
-        mover(direcao)
+        if direcao in ["norte", "sul", "leste", "oeste"]:
+            mover(direcao)
 
     elif cmd == "pegar item":
         itens = rooms[current_room].get("itens", [])
