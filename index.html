@@ -2,69 +2,109 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Hawkins RPG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stranger Things RPG</title>
 
 <style>
-body {
-    margin: 0;
-    background: #1f1e1e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: monospace;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.terminal {
-    width: 900px;
-    height: 600px;
-    background: #0d0d0d;
-    color: #00ff66;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+body{
+    background:#050505;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:monospace;
+    overflow:hidden;
 }
 
-.header {
-    background: #1a1a1a;
-    padding: 8px;
-    color: #aaa;
-    font-size: 12px;
+.terminal{
+    width:950px;
+    height:650px;
+    background:#0d0d0d;
+    border-radius:10px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border:1px solid #111;
+    box-shadow:0 0 25px rgba(0,0,0,0.8);
 }
 
-.screen {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    white-space: pre-wrap;
+.header{
+    background:#111;
+    color:#00ff66;
+    padding:10px;
+    font-size:12px;
+    letter-spacing:2px;
+    border-bottom:1px solid #1f1f1f;
 }
 
-.input {
-    border-top: 1px solid #222;
+.screen{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    color:#00ff66;
+    white-space:pre-wrap;
+    line-height:1.6;
+    font-size:15px;
 }
 
-input {
-    width: 100%;
-    padding: 12px;
-    background: black;
-    border: none;
-    outline: none;
-    color: #00ff66;
-    font-family: monospace;
+.screen::-webkit-scrollbar{
+    width:8px;
 }
+
+.screen::-webkit-scrollbar-thumb{
+    background:#00ff66;
+}
+
+.input{
+    border-top:1px solid #222;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    background:black;
+    border:none;
+    outline:none;
+    color:#00ff66;
+    font-family:monospace;
+    font-size:14px;
+}
+
+input::placeholder{
+    color:#1e7a46;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="terminal">
-    <div class="header">HAWKINS TERMINAL</div>
-    <div id="screen" class="screen"></div>
-    <div class="input">
-        <input id="cmd" placeholder="digite um comando..." autofocus />
+
+    <div class="header">
+        HAWKINS TERMINAL
     </div>
+
+    <div id="screen" class="screen"></div>
+
+    <div class="input">
+        <input
+            type="text"
+            id="cmd"
+            placeholder="Digite aqui..."
+            autocomplete="off"
+            autofocus
+        />
+    </div>
+
 </div>
 
 <script src="game.js"></script>
