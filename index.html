@@ -1,184 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Stranger Things RPG</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html, body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#050505;
-    font-family:monospace;
-}
-
-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/* =========================
-TERMINAL
-========================= */
-.terminal{
-
-    width:min(950px, 100vw);
-    height:min(650px, 100vh);
-
-    background:#0d0d0d;
-
-    border-radius:10px;
-
-    overflow:hidden;
-
-    display:flex;
-    flex-direction:column;
-
-    border:1px solid #111;
-
-    box-shadow:0 0 25px rgba(0,0,0,0.8);
-}
-
-/* =========================
-HEADER
-========================= */
-.header{
-    background:#111;
-    color:#00ff66;
-    padding:10px;
-    font-size:12px;
-    letter-spacing:2px;
-    border-bottom:1px solid #1f1f1f;
-
-    flex-shrink:0;
-}
-
-/* =========================
-TELA
-========================= */
-.screen{
-    flex:1;
-
-    padding:15px;
-
-    overflow-y:auto;
-
-    overflow-x:hidden;
-
-    color:#00ff66;
-
-    white-space:pre-wrap;
-
-    line-height:1.6;
-
-    font-size:15px;
-
-    word-break:break-word;
-}
-
-.screen::-webkit-scrollbar{
-    width:8px;
-}
-
-.screen::-webkit-scrollbar-thumb{
-    background:#00ff66;
-}
-
-/* =========================
-INPUT
-========================= */
-.input{
-    border-top:1px solid #222;
-
-    flex-shrink:0;
-}
-
-input{
-    width:100%;
-
-    padding:14px;
-
-    background:black;
-
-    border:none;
-
-    outline:none;
-
-    color:#00ff66;
-
-    font-family:monospace;
-
-    font-size:14px;
-}
-
-input::placeholder{
-    color:#1e7a46;
-}
-
-/* =========================
-MOBILE
-========================= */
-@media(max-width:768px){
-
-    .terminal{
-
-        width:100vw;
-        height:100vh;
-
-        border-radius:0;
-    }
-
-    .screen{
-
-        font-size:14px;
-
-        padding:12px;
-    }
-
-    input{
-
-        font-size:16px;
-        padding:16px;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="terminal">
-
-    <div class="header">
-        HAWKINS TERMINAL
-    </div>
-
-    <div id="screen" class="screen"></div>
-
-    <div class="input">
-        <input
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stranger Things RPG</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- TERMINAL PRINCIPAL -->
+      <div class="terminal">
+        <div class="header">
+          <div class="header-marquee">
+            <span class="header-title">HAWKINS TERMINAL ONLINE</span>
+            <span class="header-credit"
+              >:: HAWKINS TERMINAL ONLINE :: CREATOR: GUSTAVO CINTRA :: SIGNAL
+              DETECTED :: GOOD LUCK ON YOUR JOURNEY :: AND :: SURVIVE THE NIGHT
+              ::</span
+            >
+            <span class="header-credit"
+              >:: HAWKINS TERMINAL ONLINE :: CREATOR: GUSTAVO CINTRA :: SIGNAL
+              DETECTED :: GOOD LUCK ON YOUR JOURNEY :: AND :: SURVIVE THE NIGHT
+              ::</span
+            >
+          </div>
+        </div>
+        <div class="scanline"></div>
+        <div id="screen" class="screen"></div>
+        <div class="input">
+          <input
             type="text"
             id="cmd"
             placeholder="Digite aqui..."
             autocomplete="off"
             autofocus
-        />
+          />
+        </div>
+      </div>
+
+      <!-- JANELA DO RADAR -->
+      <div id="radarWindow" class="radar-window hidden">
+        <div class="radar-header">⚡ RADAR MK-II ⚡</div>
+        <div class="radar-scanline"></div>
+        <canvas
+          id="radarCanvas"
+          class="radar-canvas"
+          width="400"
+          height="400"
+          style="width: 100%; height: auto; max-height: 100%"
+        ></canvas>
+        <div class="radar-footer">
+          <span id="radarStatus">🔴 ONLINE</span>
+          <span id="radarCoords">POS: --, --</span>
+        </div>
+      </div>
     </div>
 
-</div>
-
-<script src="game.js"></script>
-
-</body>
+    <script src="game.js"></script>
+  </body>
 </html>
